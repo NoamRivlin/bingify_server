@@ -11,3 +11,5 @@ const router = express.Router();
 router.route('/').post(register);
 router.route('/login').post(login);
 router.route('/profile').post(protect, getUserProfile);
+
+module.exports = router;

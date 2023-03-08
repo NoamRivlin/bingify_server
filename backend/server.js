@@ -5,14 +5,17 @@ const { errorHandler } = require('./middleware/errorMiddleware');
 const connectDB = require('./config/db');
 connectDB();
 const cors = require('cors');
-app.use(cors());
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/group', require('./routes/groupRoutes'));
+app.use('/api/user', require('./routes/userRoutes'));
+app.use('/api/event', require('./routes/eventRoutes'));
 app.use(errorHandler);
 
 app.listen(port, () => {

@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const {
-  getGoals,
-  setGoals,
-  updateGoal,
-  deleteGoal,
+  getGroups,
+  createGroup,
+  updateGroup,
+  deleteGroup,
 } = require('../controllers/groupController');
+const protect = require('../middleware/authMiddleware');
 
-router.route('/').get(getGoals).post(setGoals);
+router.route('/').get(protect, getGroups).post(protect, createGroup);
 
-router.route('/:id').delete(deleteGoal).put(updateGoal);
+router.route('/:id').delete(protect, deleteGroup).put(protect, updateGroup);
 
 module.exports = router;

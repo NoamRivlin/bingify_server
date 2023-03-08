@@ -64,6 +64,12 @@ const getUserProfile = asyncHandler(async (req, res) => {
   res.status(201).json({ id: _id, username, email });
 });
 
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: '10d',
+  });
+};
+
 module.exports = {
   register,
   login,
