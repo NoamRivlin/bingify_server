@@ -12,7 +12,7 @@ const getGroups = asyncHandler(async (req, res) => {
   res.status(200).json({ groups });
 });
 
-// shows groups the user is a part of
+// shows the groups the user is a part of
 // const getUserGroups = asyncHandler(async (req, res) => {
 //   const groups = await Group.find({ user: req.user.id });
 //   res.status(200).json({ groups });
@@ -22,27 +22,52 @@ const createGroup = asyncHandler(async (req, res) => {
   const group = await Group.create({
     title: req.body.title,
     description: req.body.description,
-    admin: req.user.id,
+    adminId: req.user.id,
+    $push: { usersIds: req.user.id },
   });
-  res.status(200).json({ group });
+  res.status(201).json({ group });
 });
 
 // ADMIN options
+// get the groups the user is the admin of
+// GET method
 const getAdminGroups = asyncHandler(async (req, res) => {
-  const groups = await Group.find({ admin: req.user.id });
+  const groups = await Group.find({ adminId: req.user.id });
   if (!groups) {
     res.status(400);
     throw new Error('Groups not found');
   }
   res.status(200).json({ groups });
 });
-
+// PUT method
 const updateGroup = asyncHandler(async (req, res) => {
-  res.status(200).json({ msg: `update ${req.params.id}` });
+  const group = await Group.findById(req.params.id);
+  if (!group) {
+    res.status(400);
+    throw new Error('Group not found');
+  }
+
+  let { newTitle, newDescription, newEvents } = req.body;
+  if (!newTitle) newTitle = group.title;
+  if (!newDescription) newDescription = group.description;
+  // if (!newEvents) newEvents = group.events;
+
+  group.title = newTitle;
+  group.description = newDescription;
+  // group.events = newEvents;
+
+  await group.save();
+  res.status(201).json({ group });
 });
 
+// DELETE method
 const deleteGroup = asyncHandler(async (req, res) => {
-  res.status(200).json({ msg: `delete ${req.params.id}` });
+  const group = await Group.deleteOne({ _id: req.params.id });
+  if (!group) {
+    res.status(400);
+    throw new Error('Group not found');
+  }
+  res.status(201).json({ msg: `delete ${req.params.id}, ${group}` });
 });
 
 module.exports = {

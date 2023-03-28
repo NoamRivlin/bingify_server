@@ -2,40 +2,42 @@ const mongoose = require('mongoose');
 
 const groupSchema = mongoose.Schema(
   {
-    // no users yet...
-    admin: {
+    adminId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'User',
     },
+    usersIds: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User',
+      },
+    ],
     title: {
       type: String,
       required: [true, 'Add a title value'],
+      // validations to be moved to FE
+      // validate: {
+      //   // making sure the string is not empty or just whitespace
+      //   validator: function (string) {
+      //     return string.trim().length > 0;
+      //   },
+      //   message: 'Title cannot be empty',
+      // },
       unique: [true, 'Group exists'],
     },
     description: {
       type: String,
       required: [true, 'Add a description value'],
     },
-
-    // events:[
-    //   {
-    //     eventId:ObjectId,
-    //     active:Boolean,
-    //     timer:Boolean,
-    //     checklist:Boolean,
-    //   }
-    // ]
-    events: [
+    eventsIds: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Event',
       },
     ],
-    //should i include events: type Array? as each group has watch events list
-    // no, event will be its own model and each event will have a ref to a group
-    // and theyll have timestamps and on the front they will be added to an array
-    //  and displayed ordered by time
+    private: { type: Boolean, default: false },
   },
   {
     timestamps: true,

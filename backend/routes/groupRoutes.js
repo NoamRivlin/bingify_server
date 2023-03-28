@@ -9,9 +9,13 @@ const {
 } = require('../controllers/groupController');
 const protect = require('../middleware/authMiddleware');
 // User
-router.route('/').get(protect, getGroups).post(protect, createGroup);
+router.route('/').get(getGroups).post(protect, createGroup);
+// TODO: join a group functionality
 // Admin
 router.route('/admin').get(protect, getAdminGroups);
-router.route('/:id').delete(protect, deleteGroup).put(protect, updateGroup);
+router
+  .route('/admin/:id')
+  .delete(protect, deleteGroup)
+  .put(protect, updateGroup);
 
 module.exports = router;
