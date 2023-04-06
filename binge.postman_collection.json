@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "92c5955c-e5f1-4341-a4f8-01994fdd832f",
+		"name": "binge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25064012"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8000/api/user/login?username",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "asd@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/event/?title=new title&groupId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/event/?title=new title&groupId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"event",
+						""
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "new title"
+						},
+						{
+							"key": "groupId",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/group",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDhkYmQyOWI2NWUxOGMzNGNmMjA4ZCIsImlhdCI6MTY3ODMwMzU4NSwiZXhwIjoxNjc5MTY3NTg1fQ.tkXscdsX5QbR_W4gOpoXVHBly7lX6Nn3B-Pqy1ohvYc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "qweqwe",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "asd@gmail.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "123123",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "admin",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "lol",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "description$$$",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/group",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"group"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

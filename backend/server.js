@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv').config();
-const port = process.env.port || 4141;
+const PORT = process.env.PORT || 4141;
 const { errorHandler } = require('./middleware/errorMiddleware');
 const connectDB = require('./config/db');
 connectDB();
@@ -18,6 +18,6 @@ app.use('/api/user', require('./routes/userRoutes'));
 app.use('/api/event', require('./routes/eventRoutes'));
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log('🛴 on port ' + port);
+app.listen(PORT, () => {
+  console.log('🛴 on port ' + PORT);
 });
